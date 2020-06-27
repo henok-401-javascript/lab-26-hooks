@@ -6,7 +6,7 @@ class Form extends React.Component{
     super(props)
     this.state = {
       description: '',
-      assigned:'',
+      assigned:'Henok G.',
       status:'',
       difficulty:0,
 
@@ -28,6 +28,13 @@ this.setState({description:e.target.value});
   }
   submitHandler(e){
     console.log('I am on the submit button ' , e);
+  }
+  componentDidMount(){
+
+    document.title = this.state.assigned;
+  }
+  componentDidUpdate(){
+    document.title = this.state.assigned;
   }
 
 
