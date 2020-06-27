@@ -1,16 +1,19 @@
 
-// SHOULD IMPORT TODO FORM
-// ALSO LIST TODO TASKS USING THE TODO LIST COMPONENTS.
 
 import React from 'react';
-import Form from './ToDoForm';
+import ToDoForm from './ToDoForm';
+
 
 function ToDo(){
 
+  function addTasks(){
+    // setStates({addTasks})
+  }
+
   return(
-    <div>
-      <Form/>
-    </div>
+    <Container>
+      <ToDoForm addTasks={addTasks}/>
+    </Container>
   );
 }
 
