@@ -6,8 +6,8 @@
 ### Links and Resources
 
 
-- [submission PR]()
-- [netlify]()
+- [submission PR](https://github.com/henok-401-javascript/lab-26-hooks/pull/1)
+- [netlify](lab-26-hooks-davinci-e94cb4.netlify.app)
 
 
 #### How to initialize/run your application (where applicable)
