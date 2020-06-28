@@ -6,13 +6,18 @@ import {Button} from 'react-bootstrap';
 
 
 function ToDoForm(props){
-const [description , setDescripton] = useState(props.description);
-const [assigned , setAssigned] = useState(props.assigned);
+const [description , setDescription] = useState(props.description || '');
+const [assigned , setAssigned] = useState(props.assigned || '');
+const[status , setStatus] = useState(props.status || 'Incomplete');
+const [difficulty , setDifficulty] = useState(props.difficulty || 1);
+console.log(description ,status , difficulty);
 
 function submitHandler(){
   props.addTasks({
     description,
     assigned,
+    status,
+    difficulty,
   
   });
   
@@ -25,10 +30,11 @@ function submitHandler(){
   <Form.Group controlId="ToDo-description">
     <Form.Label>Task Description</Form.Label>
   
-    <Form.Control type="text" 
+    <Form.Control 
+    type="text" 
     value={description}
     onChange={(e) =>{
-      setDescripton(e.target.value);
+      setDescription(e.target.value);
     }}
     />
   </Form.Group>
@@ -47,16 +53,36 @@ function submitHandler(){
 
   <Form.Group controlId="ToDo-status">
   <Form.Label> Status</Form.Label>
-    <Form.Check type="switch" label="Check me out" />
+    <Form.Check 
+ 
+    value={status === 'complete'}
+    onChange={() =>{
+      setStatus(status === 'complete' ? 'Incomplete' : 'complete' ,);
+    }}
+    type="switch" 
+    id='status -switch'
+    label={status} 
+    
+    />
   </Form.Group>
 
  
   <Form.Group controlId="formBasicRange">
     <Form.Label>Difficulty</Form.Label>
-    <Form.Control type="range" />
+    <Form.Control 
+    type="range"
+    step={1}
+    min={0}
+    max={5}
+    value={difficulty}
+    onChange={(e) =>{
+      setDifficulty(e.target.value);
+    }}
+    
+    />
   </Form.Group>
 
-  <Button variant="primary" type="submit"  onClick={submitHandler}>
+  <Button variant="primary" type="button"  onClick={submitHandler}>
     Submit
   </Button>
 

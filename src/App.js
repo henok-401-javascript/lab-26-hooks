@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import ToDo from './components/ToDo';
+import './styles/styles.scss';
 // import header
 // import footer
 // import ToDo components
