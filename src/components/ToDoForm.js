@@ -1,85 +1,94 @@
-import React from 'react';
-
-
-class Form extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      description: '',
-      assigned:'Henok G.',
-      status:'',
-      difficulty:0,
-
-
-    }
-
-  }
-  descriptionHandler(e){
-this.setState({description:e.target.value});
-  }
-  assignedHandler(e){
-    this.setState({assigned:e.target.value});
-  }
-  statusHandler(e){
-    this.setState({status:e.target.value});
-  }
-  difficultyHandler(e){
-    this.setState({difficulty:e.target.value});
-  }
-  submitHandler(e){
-    console.log('I am on the submit button ' , e);
-  }
-  componentDidMount(){
-
-    document.title = this.state.assigned;
-  }
-  componentDidUpdate(){
-    document.title = this.state.assigned;
-  }
+import React, { useState } from 'react';
+import {Form} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 
 
-  render(){
-console.log(this.state);
-    return(
-      <div>
-        <label>Task Description :</label>
-        <input type="text"
-         value={this.props.description} 
-         onChange={this.descriptionHandler.bind(this)}
-         ></input>
-                        
-  <label>Assigned To :</label>
-  <input type="text"
-  value={this.props.assigned}
-  onChange={this.assignedHandler.bind(this)}>
-  </input>
+
+function ToDoForm(props){
+const [description , setDescription] = useState(props.description || '');
+const [assigned , setAssigned] = useState(props.assigned || '');
+const[status , setStatus] = useState(props.status || 'Incomplete');
+const [difficulty , setDifficulty] = useState(props.difficulty || 1);
+console.log(description ,status , difficulty);
+
+function submitHandler(){
+  props.addTasks({
+    description,
+    assigned,
+    status,
+    difficulty,
   
-        <label>Status :</label>
-        <select onChange={this.statusHandler.bind(this)}>
-        <option value={this.props.status}>complete</option>
-        <option value={this.props.status}>InComplete</option>
-        </select>
-
-
-
-  <label>Difficulty :</label>
-  <select onChange={this.difficultyHandler.bind(this)}>
-  <option value={this.props.difficulty}>1</option>
-  <option value={this.props.difficulty}>2</option>
-  <option value={this.props.difficulty}>3</option>
-  <option value={this.props.difficulty}>4</option>
-  <option value={this.props.difficulty}>5</option> 
-  </select>
+  });
   
-        
-  <button onClick={this.submitHandler.bind(this)}>Submit</button>
-      </div>
-    );
   }
+
+  return(
+  
+    <Form>
+
+  <Form.Group controlId="ToDo-description">
+    <Form.Label>Task Description</Form.Label>
+  
+    <Form.Control 
+    type="text" 
+    value={description}
+    onChange={(e) =>{
+      setDescription(e.target.value);
+    }}
+    />
+  </Form.Group>
+
+  <Form.Group controlId="ToDo-assigned">
+    <Form.Label>Assigned To</Form.Label>
+    <Form.Control 
+    type="text" 
+    value={assigned}
+    onChange={(e) =>{
+      setAssigned(e.target.value);
+    }}
     
+    />
+  </Form.Group>
+
+  <Form.Group controlId="ToDo-status">
+  <Form.Label> Status</Form.Label>
+    <Form.Check 
  
+    value={status === 'complete'}
+    onChange={() =>{
+      setStatus(status === 'complete' ? 'Incomplete' : 'complete' ,);
+    }}
+    type="switch" 
+    id='status -switch'
+    label={status} 
+    
+    />
+  </Form.Group>
+
+ 
+  <Form.Group controlId="formBasicRange">
+    <Form.Label>Difficulty</Form.Label>
+    <Form.Control 
+    type="range"
+    step={1}
+    min={0}
+    max={5}
+    value={difficulty}
+    onChange={(e) =>{
+      setDifficulty(e.target.value);
+    }}
+    
+    />
+  </Form.Group>
+
+  <Button variant="primary" type="button"  onClick={submitHandler}>
+    Submit
+  </Button>
+
+</Form>
+
+  );
 
 }
-
-export default Form;
+export default ToDoForm;
