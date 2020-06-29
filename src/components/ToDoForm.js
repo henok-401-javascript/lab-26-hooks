@@ -18,7 +18,6 @@ function submitHandler(){
     assigned,
     status,
     difficulty,
-  
   });
   
   }
